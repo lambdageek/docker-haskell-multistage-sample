@@ -10,7 +10,7 @@ RUN cabal v2-build -v1 --dependencies-only all
 
 COPY . /opt/build
 
-RUN cabal v2-install --installdir /opt/build/out --install-method=copy --enable-executable-static --overwrite-policy=always
+RUN cabal v2-install -v1 --installdir /opt/build/out --install-method=copy --enable-executable-static --overwrite-policy=always
 
 RUN strip /opt/build/out/hw
 

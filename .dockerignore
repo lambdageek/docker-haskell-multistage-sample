@@ -13,3 +13,6 @@ cabal.project.local
 # my editor(s)
 *~
 
+# infrastructure
+docker.make
+
