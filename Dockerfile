@@ -1,4 +1,4 @@
-FROM haskell:8.10
+FROM haskell:8.10 as builder
 
 WORKDIR /opt/build
 
@@ -16,10 +16,10 @@ RUN strip /opt/build/out/hw
 
 RUN ls -lh /opt/build/out/hw
 
-FROM debian:buster-slim
+FROM alpine:3.12 as prod
 
 WORKDIR /opt/hw
 
-COPY --from=0 /opt/build/out/hw .
+COPY --from=builder /opt/build/out/hw .
 
 CMD ["./hw"]
