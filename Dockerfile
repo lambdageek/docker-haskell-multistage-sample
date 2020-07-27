@@ -1,3 +1,4 @@
+# syntax = docker/dockerfile:1.0-experimental
 FROM haskell:8.10 as builder
 
 WORKDIR /opt/build

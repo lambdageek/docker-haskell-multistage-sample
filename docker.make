@@ -2,7 +2,7 @@
 .PHONY: image run prune
 
 image:
-	docker build -t hw .
+	DOCKER_BUILDKIT=1 docker build -t hw .
 
 run:
 	docker run --rm hw:latest
