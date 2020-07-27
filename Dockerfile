@@ -11,7 +11,10 @@ RUN cabal v2-build -v1 --dependencies-only all
 
 COPY . /opt/build
 
-RUN cabal v2-install -v1 --installdir /opt/build/out --install-method=copy --enable-executable-static --overwrite-policy=always
+RUN mkdir -p /opt/build/secrets
+
+# XXX this will drop a tarball with the secret in it in dist-newstyle
+RUN --mount=type=secret,id=secretmodule,dst=/opt/build/secrets/Secrets.hs cabal v2-install -v1 --installdir /opt/build/out --install-method=copy --enable-executable-static --overwrite-policy=always
 
 RUN strip /opt/build/out/hw
 
@@ -23,4 +26,4 @@ WORKDIR /opt/hw
 
 COPY --from=builder /opt/build/out/hw .
 
-CMD ["./hw"]
+ENTRYPOINT ["/opt/hw/hw"]
